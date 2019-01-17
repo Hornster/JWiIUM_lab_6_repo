@@ -1,4 +1,4 @@
-package com.polsl.jwiiumlab6.viewmodel;
+package com.polsl.jwiiumlab6.model;
 
 import java.util.List;
 
@@ -7,6 +7,10 @@ import pl.polsl.model.PredefinedCommunicates;
 import pl.polsl.utility.dataCheck.DataChk;
 import pl.polsl.utility.dataCheck.ParseModifyString;
 
+/** Tests input data, whether is it correct.
+ * @author Karol Kozuch Group 4 Section 8
+ * @version 1.0.0
+ */
 public class DataTester {
     /**
      * Message describing last error that occurred. Reset upon reading.

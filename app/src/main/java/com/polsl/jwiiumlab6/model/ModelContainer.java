@@ -5,6 +5,7 @@ import android.graphics.ColorSpace;
 import java.util.LinkedList;
 import java.util.List;
 
+import pl.polsl.controller.calculation.CalculationModule;
 import pl.polsl.model.queryHistory.QueryManager;
 import pl.polsl.model.queryHistory.SingleQuery;
 
@@ -14,6 +15,14 @@ import pl.polsl.model.queryHistory.SingleQuery;
  */
 public class ModelContainer {
     /**
+     * Main calculation module.
+     */
+    private CalculationModule calculationModule = new CalculationModule();
+    /**
+     * Input data testing class.
+     */
+    private DataTester dataTester = new DataTester();
+    /**
     Instance of this singleton.
      */
     private static ModelContainer modelContainer;
@@ -22,7 +31,10 @@ public class ModelContainer {
      */
     private QueryManager queryManager = new QueryManager();
 
-    private ModelContainer(){};
+    private ModelContainer()
+    {
+        calculationModule.addListener(queryManager);
+    }
 
     /**
      * If singleton hasn't got any instance so far - creates one. Then returns it.
@@ -50,5 +62,15 @@ public class ModelContainer {
         }
 
         return queries;
+    }
+
+    public DataTester getDataTester()
+    {
+        return dataTester;
+    }
+
+    public CalculationModule getCalculationModule()
+    {
+        return calculationModule;
     }
 }
