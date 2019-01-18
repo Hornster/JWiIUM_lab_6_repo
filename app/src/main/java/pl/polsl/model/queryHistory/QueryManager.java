@@ -52,7 +52,7 @@ public class QueryManager implements CalcResultListener {
         StringBuilder queries = new StringBuilder();
         if(history.size() <= 0 || queriesIndexes.size() <= 0)
         {
-            queries.append(PredefinedCommunicates.noQueriesInHistory());
+            queries.append(PredefinedCommunicates.noQueriesMadeYet);
         }
         else
         {
@@ -87,7 +87,7 @@ public class QueryManager implements CalcResultListener {
         StringBuilder queries = new StringBuilder();
         if(history.size() <= 0)
         {
-            queries.append(PredefinedCommunicates.noQueriesInHistory());
+            queries.append(PredefinedCommunicates.noQueriesMadeYet);
         }
         else
         {
