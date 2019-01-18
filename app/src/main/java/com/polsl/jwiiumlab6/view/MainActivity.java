@@ -73,15 +73,10 @@ public class MainActivity extends AppCompatActivity implements ICalcResultListen
         accuracyTextBox = findViewById(R.id.accuracyTextBox);
         resultShowingLabel = findViewById(R.id.resultShowingLabel);
         //Assign triggers
-        calcTriggerButton.setOnClickListener(new HandleCalcButton());
+        if(!calcTriggerButton.hasOnClickListeners()) {
+            calcTriggerButton.setOnClickListener(new HandleCalcButton());
+        }
             //placeholder for queryHistoryButton
-    }
-
-    @Override
-    protected void onStop()
-    {
-        super.onStop();
-
     }
 
     @Override
