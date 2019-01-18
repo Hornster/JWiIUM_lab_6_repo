@@ -9,5 +9,5 @@ public interface ICalcResultListener {
      * Called by calculation performing object to retrieve calculations result.
      * @param resultValue Result value of the calculations.
      */
-    void retrieveResult(double resultValue);
+    void retrieveResult(Double resultValue);
 }
