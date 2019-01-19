@@ -5,6 +5,7 @@ import pl.polsl.model.CalculationData;
 import pl.polsl.model.IntegralData;
 import pl.polsl.model.exceptions.IntegralCalculationException;
 import pl.polsl.model.queryHistory.CalcResultListener;
+import pl.polsl.model.queryHistory.SingleQuery;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -72,6 +73,15 @@ public class CalculationModule {
         return result;
     }
 
+    public double performCalculation(SingleQuery queryData) throws IntegralCalculationException
+    {
+        setFunction(queryData.getMathFunction());
+        assignNewIntegralRange(new Pair<>(queryData.getRangeBegin(),queryData.getRangeEnd()));
+        selectMethod(queryData.getMethod());
+        setAccuracy(queryData.getAccuracy());
+
+        return performCalculation();
+    }
 
     /**Responsible for selecting method of calculating the integral.
      * @param methodCode Char code of the method. 't' stands for Trapezoidal, 's' for Square method.

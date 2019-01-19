@@ -1,5 +1,6 @@
 package com.polsl.jwiiumlab6.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -72,6 +73,9 @@ public class MainActivity extends AppCompatActivity implements ICalcResultListen
         approxMethodTextBox = findViewById(R.id.approxMethodTextBox);
         accuracyTextBox = findViewById(R.id.accuracyTextBox);
         resultShowingLabel = findViewById(R.id.resultShowingLabel);
+        //Assign listeners
+        dataHandler.registerErrorListener(this);
+        ((DataHandler) dataHandler).registerCalcResultListener(this);
         //Assign triggers
         if(!calcTriggerButton.hasOnClickListeners()) {
             calcTriggerButton.setOnClickListener(new HandleCalcButton());
@@ -96,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements ICalcResultListen
     {
         /**
          * Retrieves arguments and passes them to view-model for processing. If arguments are correct - triggers calculation process.
-         * @param v
+         * @param v View which the button belongs to.
          */
         @Override
         public void onClick(View v) {
@@ -117,6 +121,18 @@ public class MainActivity extends AppCompatActivity implements ICalcResultListen
                 return;    //At least one of arguments was wrong. Stop calculation procedure.
             }
             startCalculations.triggerAction();  //Provided data was correct - perform calculation.
+        }
+    }
+
+    /**
+     * Event handler - when query history showing button is pressed - this class will handle it.
+     */
+    class HandleQueryButton implements View.OnClickListener
+    {
+        @Override
+        public void onClick(View v) {
+            Intent showQueryIntent = new Intent(this, QueryShowingActivity.class);
+
         }
     }
 }

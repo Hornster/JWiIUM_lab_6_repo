@@ -78,7 +78,7 @@ public class DataTester {
         if(ParseModifyString.tryStringToInt(accuracy))
         {
             int numberAccuracy = Integer.parseInt(accuracy);
-            if(numberAccuracy<=0)
+            if(numberAccuracy>0)
             {
                 accuracyCorrect = true;
             }

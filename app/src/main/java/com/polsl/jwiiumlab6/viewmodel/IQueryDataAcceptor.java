@@ -23,8 +23,7 @@ public interface IQueryDataAcceptor {
     boolean setIntegralData(String integralFormula, String integralBegin, String integralEnd);
 
     /**
-     * Used to retrieve error description. Error description shall be set whenever an error is detected.
-     * @return String containing description of error.
+     * Used to retrieve error description. Registers a listener that will be informed whenever an error occurs.
      */
-    String retrieveErrorMsg();
+    void registerErrorListener(ICalcExceptionListener listener);
 }

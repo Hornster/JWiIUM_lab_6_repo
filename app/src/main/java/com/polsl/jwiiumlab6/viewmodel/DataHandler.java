@@ -1,5 +1,7 @@
 package com.polsl.jwiiumlab6.viewmodel;
 
+import android.graphics.ColorSpace;
+
 import com.polsl.jwiiumlab6.model.DataTester;
 import com.polsl.jwiiumlab6.model.ModelContainer;
 
@@ -32,6 +34,11 @@ public class DataHandler implements IQueryDataAcceptor, IActionTrigger {
     public boolean setCalcData(String method, String accuracy) {
         if(!ModelContainer.getInstance().getDataTester().chkCalcMethodParams(method, accuracy))
         {
+            String exception = retrieveErrorMsg();
+            for(ICalcExceptionListener listener : calcExceptionListeners)
+            {
+                listener.noticeException(exception);
+            }
             return false;
         }
         int readyAccuracy = Integer.parseInt(accuracy);
@@ -45,6 +52,11 @@ public class DataHandler implements IQueryDataAcceptor, IActionTrigger {
     public boolean setIntegralData(String integralFormula, String integralBegin, String integralEnd) {
         if(!ModelContainer.getInstance().getDataTester().chkIntegralParams(integralFormula, integralBegin, integralEnd))
         {
+            String exception = retrieveErrorMsg();
+            for(ICalcExceptionListener listener : calcExceptionListeners)
+            {
+                listener.noticeException(exception);
+            }
             return false;
         }
 
@@ -58,7 +70,15 @@ public class DataHandler implements IQueryDataAcceptor, IActionTrigger {
     }
 
     @Override
-    public String retrieveErrorMsg() {
+    public void registerErrorListener(ICalcExceptionListener listener) {
+        calcExceptionListeners.add(listener);
+    }
+
+    /**
+     * Retrieves the error message from the checking class.
+     * @return String containing the message describing the error that has occurred.
+     */
+    private String retrieveErrorMsg() {
         return ModelContainer.getInstance().getDataTester().retreiveErrorMsg();
     }
 
@@ -74,7 +94,7 @@ public class DataHandler implements IQueryDataAcceptor, IActionTrigger {
     @Override
     public void triggerAction() {
         try {
-            double result = ModelContainer.getInstance().getCalculationModule().performCalculation();
+            double result = ModelContainer.getInstance().getCalculationModule().performCalculation(currentQuery);
             for (ICalcResultListener listener : resultListeners) {
                 listener.retrieveResult(result);
             }
