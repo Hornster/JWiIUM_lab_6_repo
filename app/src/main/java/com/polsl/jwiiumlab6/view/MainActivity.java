@@ -57,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements ICalcResultListen
      * Contains class that allows for sending data to model (indirectly, through view-model)
      */
     private IQueryDataAcceptor dataHandler = new DataHandler();
+    /**
+     * Reference to object that forces start of performing calculations.
+     */
     private IActionTrigger startCalculations;
 
     @Override
@@ -86,11 +89,19 @@ public class MainActivity extends AppCompatActivity implements ICalcResultListen
         }
     }
 
+    /**
+     * Shows a toast containing information about most recent error in the program.
+     * @param exceptionMsg Message describing the exception.
+     */
     @Override
     public void noticeException(String exceptionMsg) {
         Toast.makeText(this, exceptionMsg, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Puts the result into label UI, making it visible for the user.
+     * @param resultValue Result value of the calculations.
+     */
     @Override
     public void retrieveResult(Double resultValue) {
         resultShowingLabel.setText(resultValue.toString());

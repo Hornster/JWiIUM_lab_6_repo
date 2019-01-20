@@ -6,7 +6,9 @@
  *
  * Contains interface: {@link com.polsl.jwiiumlab6.viewmodel.ICalcResultListener},
  * {@link com.polsl.jwiiumlab6.viewmodel.IQueryDataAcceptor},
- * {@link com.polsl.jwiiumlab6.viewmodel.IQueryHistoryRetreiver}
+ * {@link com.polsl.jwiiumlab6.viewmodel.IQueryHistoryRetreiver},
+ * {@link com.polsl.jwiiumlab6.viewmodel.IActionTrigger},
+ * {@link com.polsl.jwiiumlab6.viewmodel.ICalcExceptionListener}
  */
 package com.polsl.jwiiumlab6.viewmodel;
 

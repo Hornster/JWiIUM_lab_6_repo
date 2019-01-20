@@ -19,17 +19,22 @@ public class DataHandler implements IQueryDataAcceptor, IActionTrigger {
     /**
      * Contains list of listeners for the calculations results.
      */
-    List<ICalcResultListener> resultListeners = new LinkedList<>();
+    private List<ICalcResultListener> resultListeners = new LinkedList<>();
     /**
      * Contains list of listeners for calculation connected exceptions.
      */
-    List<ICalcExceptionListener> calcExceptionListeners = new LinkedList<>();
+    private List<ICalcExceptionListener> calcExceptionListeners = new LinkedList<>();
     /**
      * Single query object that temporarily stores info about next query.
      */
     private SingleQuery currentQuery = new SingleQuery();
 
-
+    /**
+     * Saves the configuration for calculation of the approximation method.
+     * @param method Character indicating requested approximation method.
+     * @param accuracy Amount of geometrical shapes used in approximation.
+     * @return FALSE if provided data was incorrect. TRUE otherwise.
+     */
     @Override
     public boolean setCalcData(String method, String accuracy) {
         if(!ModelContainer.getInstance().getDataTester().chkCalcMethodParams(method, accuracy))
@@ -48,6 +53,13 @@ public class DataHandler implements IQueryDataAcceptor, IActionTrigger {
         return true;
     }
 
+    /**
+     * Saves the configuration for calculation of the integral data.
+     * @param integralFormula Formula of integral that is used in calculations.
+     * @param integralBegin Beginning of the range of the finite integral.
+     * @param integralEnd End of the range of the finite integral.
+     * @return FALSE if provided data was incorrect. TRUE otherwise.
+     */
     @Override
     public boolean setIntegralData(String integralFormula, String integralBegin, String integralEnd) {
         if(!ModelContainer.getInstance().getDataTester().chkIntegralParams(integralFormula, integralBegin, integralEnd))
@@ -69,6 +81,10 @@ public class DataHandler implements IQueryDataAcceptor, IActionTrigger {
         return true;
     }
 
+    /**
+     * Assigns error listener which will be informed about errors whenever they happen.
+     * @param listener New listener.
+     */
     @Override
     public void registerErrorListener(ICalcExceptionListener listener) {
         calcExceptionListeners.add(listener);
@@ -91,6 +107,9 @@ public class DataHandler implements IQueryDataAcceptor, IActionTrigger {
         resultListeners.add(listener);
     }
 
+    /**
+     * Triggers the calculation process, passing required data.
+     */
     @Override
     public void triggerAction() {
         try {

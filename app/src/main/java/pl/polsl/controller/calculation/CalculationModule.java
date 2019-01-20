@@ -43,7 +43,7 @@ public class CalculationModule {
     }
     /**Assigns input function to integral.
      * @param functionSyntax Syntax of newly input function.*/
-    public void setFunction(String functionSyntax)
+    private void setFunction(String functionSyntax)
     {
         integral.setIntegralFunc(functionSyntax);
     }
@@ -62,7 +62,7 @@ public class CalculationModule {
      * @throws IntegralCalculationException Thrown when there was no function assigned, it was corrupt
      * or the integral was not converging.
      */
-    public double performCalculation() throws IntegralCalculationException {
+    private double performCalculation() throws IntegralCalculationException {
         calculator.setIntegralData(integral);
 
         double result = calculator.calculateIntegral();
@@ -73,6 +73,13 @@ public class CalculationModule {
         return result;
     }
 
+    /**
+     * Assigns passed data, then triggers the calculations and returns the result.
+     * @param queryData Full data needed toperform calculations.
+     * @return Result of calculations.
+     * @throws IntegralCalculationException  Thrown when there was no function assigned, it was corrupt
+     *  or the integral was not converging.
+     */
     public double performCalculation(SingleQuery queryData) throws IntegralCalculationException
     {
         setFunction(queryData.getMathFunction());
@@ -86,7 +93,7 @@ public class CalculationModule {
     /**Responsible for selecting method of calculating the integral.
      * @param methodCode Char code of the method. 't' stands for Trapezoidal, 's' for Square method.
      * @throws IntegralCalculationException when the provided method symbol was not recognized.*/
-    public void selectMethod(char methodCode) throws IntegralCalculationException
+    private void selectMethod(char methodCode) throws IntegralCalculationException
     {
 
         if(lastMethodDecision == methodCode)
@@ -112,7 +119,7 @@ public class CalculationModule {
      * Assigns new range to the integral.
      * @param newRange Pair of doubles defining new range. First is beginning, second - end.
      */
-    public void assignNewIntegralRange(Pair<Double, Double> newRange)
+    private void assignNewIntegralRange(Pair<Double, Double> newRange)
     {
         integral.setBeginning(newRange.first);
         integral.setEnd(newRange.second);
@@ -122,7 +129,7 @@ public class CalculationModule {
      * Assigns new accuracy (amount of geometrical shapes used in approximation).
      * @param newAccuracy How many geometrical shapes to use?(Positive number. Bigger is better, but slower).
      */
-    public void setAccuracy(int newAccuracy)
+    private void setAccuracy(int newAccuracy)
     {
         calculationData.setAccuracy(newAccuracy);
         calculator.setPrecision(newAccuracy);

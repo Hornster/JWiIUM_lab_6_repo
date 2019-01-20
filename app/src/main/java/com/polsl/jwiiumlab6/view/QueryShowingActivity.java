@@ -42,12 +42,20 @@ public class QueryShowingActivity extends AppCompatActivity {
      */
     private Button returnButton;
 
+    /**
+     * Sets the view and creates instance of query retrieving class.
+     * @param savedInstanceState state of last saved instance.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_query_showing);
         queryHistoryRetriever = new QueryHistoryRetriever();
     }
+
+    /**
+     * Finds UI controls and hooks a listener to the return button, if none assigned yet.
+     */
     @Override
     public void onStart()
     {
@@ -59,6 +67,10 @@ public class QueryShowingActivity extends AppCompatActivity {
             returnButton.setOnClickListener(new HandleReturnButton());
         }
     }
+
+    /**
+     * Refreshes the list of already made queries.
+     */
     @Override
     public void onResume()
     {
@@ -66,7 +78,7 @@ public class QueryShowingActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();        //Retrieve the intent but do not use it - no useful info in there, currently.
 
         queries = queryHistoryRetriever.getQueryHistory();
-        queriesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, queries);
+        queriesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, queries);
         shownQueries.setAdapter(queriesAdapter);
         //queriesAdapter.notifyDataSetChanged();
     }
@@ -76,6 +88,10 @@ public class QueryShowingActivity extends AppCompatActivity {
      */
     class HandleReturnButton implements View.OnClickListener
     {
+        /**
+         * Causes return to caller.
+         * @param v View associated with the control (source of event).
+         */
 
         @Override
         public void onClick(View v) {
