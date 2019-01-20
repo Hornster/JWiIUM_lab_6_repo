@@ -59,12 +59,12 @@ public class DataTester {
     public boolean chkCalcMethodParams(String method, String accuracy)
     {
         boolean methodRecognized=false;
-        for(CalculationData.calcMethodTypes type : CalculationData.calcMethodTypes.values())
-        {
-            if(method.charAt(0) == type.toString().charAt(0))
-            {
-                methodRecognized= true;
-                break;
+        if(method.length() > 0) {
+            for (CalculationData.calcMethodTypes type : CalculationData.calcMethodTypes.values()) {
+                if (method.charAt(0) == type.toString().charAt(0)) {
+                    methodRecognized = true;
+                    break;
+                }
             }
         }
 
