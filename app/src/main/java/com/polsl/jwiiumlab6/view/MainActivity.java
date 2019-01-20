@@ -80,7 +80,10 @@ public class MainActivity extends AppCompatActivity implements ICalcResultListen
         if(!calcTriggerButton.hasOnClickListeners()) {
             calcTriggerButton.setOnClickListener(new HandleCalcButton());
         }
-            //placeholder for queryHistoryButton
+        if(!queryHistoryButton.hasOnClickListeners())
+        {
+            queryHistoryButton.setOnClickListener(new HandleQueryButton());
+        }
     }
 
     @Override
@@ -131,8 +134,8 @@ public class MainActivity extends AppCompatActivity implements ICalcResultListen
     {
         @Override
         public void onClick(View v) {
-            Intent showQueryIntent = new Intent(this, QueryShowingActivity.class);
-
+           Intent showQueryIntent = new Intent(v.getContext(), QueryShowingActivity.class);
+           startActivity(showQueryIntent);
         }
     }
 }

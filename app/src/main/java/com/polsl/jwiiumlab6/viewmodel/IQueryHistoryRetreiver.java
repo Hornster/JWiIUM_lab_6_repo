@@ -1,5 +1,6 @@
 package com.polsl.jwiiumlab6.viewmodel;
 
+
 import java.util.List;
 
 /** Interface used to retrieve query history by the view.
